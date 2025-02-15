@@ -14,11 +14,13 @@ public class PessoaFisica {
     @Email
     private String email;
     private String telefone;
-    private String endereco;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "endereco_id")
+    private Endereco endereco;
 
     public PessoaFisica() {}
 
-    public PessoaFisica(String nome, String cpf, String email, String telefone, String endereco) {
+    public PessoaFisica(String nome, String cpf, String email, String telefone, Endereco endereco) {
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
@@ -66,11 +68,11 @@ public class PessoaFisica {
         this.telefone = telefone;
     }
 
-    public String getEndereco() {
+    public Endereco getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(String endereco) {
+    public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
 }

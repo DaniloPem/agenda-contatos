@@ -1,9 +1,6 @@
 package com.agenda.contatos.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Endereco {
@@ -11,19 +8,21 @@ public class Endereco {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String cep;
-    private String rua;
+    private String logradouro;
     private Integer numero;
     private String complemento;
     private String bairro;
     private String cidade;
     private String estado;
+    @OneToOne(mappedBy = "endereco", fetch = FetchType.LAZY)
+    private PessoaFisica pessoaFisica;
 
     public Endereco() {
     }
 
-    public Endereco(String cep, String rua, Integer numero, String complemento, String bairro, String cidade, String estado) {
+    public Endereco(String cep, String logradouro, Integer numero, String complemento, String bairro, String cidade, String estado) {
         this.cep = cep;
-        this.rua = rua;
+        this.logradouro = logradouro;
         this.numero = numero;
         this.complemento = complemento;
         this.bairro = bairro;
@@ -47,12 +46,12 @@ public class Endereco {
         this.cep = cep;
     }
 
-    public String getRua() {
-        return rua;
+    public String getLogradouro() {
+        return logradouro;
     }
 
-    public void setRua(String rua) {
-        this.rua = rua;
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
     }
 
     public Integer getNumero() {
