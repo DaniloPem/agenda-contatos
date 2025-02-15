@@ -1,4 +1,4 @@
-package com.desafio.agenda;
+package com.agenda.contatos;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
