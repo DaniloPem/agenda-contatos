@@ -21,11 +21,11 @@ public class PessoaFisica {
 
     public PessoaFisica() {}
 
-    public PessoaFisica(String nome, String cpf, String email, String telefone, Endereco endereco) {
-        this.nome = nome;
-        this.cpf = cpf;
-        this.email = email;
-        this.telefone = telefone;
+    public PessoaFisica(DadosCadastroPessoaFisica dadosCadastroPessoaFisica, Endereco endereco) {
+        this.nome = dadosCadastroPessoaFisica.nome();
+        this.cpf = dadosCadastroPessoaFisica.cpf();
+        this.email = dadosCadastroPessoaFisica.email();
+        this.telefone = dadosCadastroPessoaFisica.telefone();
         this.endereco = endereco;
     }
 
