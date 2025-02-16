@@ -1,0 +1,3 @@
+ALTER TABLE endereco
+ALTER COLUMN complemento
+DROP NOT NULL;

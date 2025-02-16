@@ -1,0 +1,2 @@
+ALTER TABLE pessoa_fisica
+ADD COLUMN deletado BOOLEAN DEFAULT FALSE;
