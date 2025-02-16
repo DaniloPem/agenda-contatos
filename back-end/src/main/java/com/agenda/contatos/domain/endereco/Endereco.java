@@ -1,5 +1,6 @@
-package com.agenda.contatos.model;
+package com.agenda.contatos.domain.endereco;
 
+import com.agenda.contatos.domain.pessoa_fisica.PessoaFisica;
 import jakarta.persistence.*;
 
 @Entity

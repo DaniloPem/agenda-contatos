@@ -1,5 +1,6 @@
-package com.agenda.contatos.model;
+package com.agenda.contatos.domain.pessoa_fisica;
 
+import com.agenda.contatos.domain.endereco.Endereco;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 
