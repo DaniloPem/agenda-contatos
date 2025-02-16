@@ -1,10 +1,7 @@
 package com.agenda.contatos.domain.pessoa_fisica;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/db/pessoa-fisica")
@@ -14,6 +11,11 @@ public class PessoaFisicaController {
 
     public PessoaFisicaController(PessoaFisicaService pessoaFisicaService) {
         this.pessoaFisicaService = pessoaFisicaService;
+    }
+
+    @GetMapping("/{id}")
+    public @ResponseBody DadosVisualizacaoPessoaFisica pegarPessoaFiscaPorId(@PathVariable Long id) {
+        return pessoaFisicaService.pegarPessoaFisicaPorId(id);
     }
 
     @PostMapping

@@ -20,6 +20,11 @@ public class PessoaFisicaService {
         this.enderecoRepository = enderecoRepository;
     }
 
+    public DadosVisualizacaoPessoaFisica pegarPessoaFisicaPorId(Long id) {
+        Optional<PessoaFisica> pessoaFisicaOptional = pessoaFisicaRepository.findById(id);
+        PessoaFisica pessoaFisica = pessoaFisicaOptional.orElseThrow(() -> new DataIntegrityViolationException("PESSOA FÍSCA NÃO EXISTE"));
+        return new DadosVisualizacaoPessoaFisica(pessoaFisica);
+    }
 
     public PessoaFisica criarPessoaFisica(DadosCadastroPessoaFisica dadosCadastroPessoaFisica) {
         Endereco endereco = getEnderco(dadosCadastroPessoaFisica.enderecoId());
@@ -31,4 +36,5 @@ public class PessoaFisicaService {
         Optional<Endereco> enderecoOptional = enderecoRepository.findById(enderecoId);
         return enderecoOptional.orElseThrow(() -> new DataIntegrityViolationException("ENDEREÇO NÃO EXISTE."));
     }
+
 }

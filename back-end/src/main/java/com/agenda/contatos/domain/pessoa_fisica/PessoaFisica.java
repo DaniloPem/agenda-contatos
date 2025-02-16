@@ -76,4 +76,8 @@ public class PessoaFisica {
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
+
+    public Long getEnderecoId() {
+        return endereco.getId();
+    }
 }
