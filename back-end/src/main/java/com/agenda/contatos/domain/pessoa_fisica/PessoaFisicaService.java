@@ -32,6 +32,18 @@ public class PessoaFisicaService {
         return pessoaFisicaRepository.save(pessoaFisica);
     }
 
+    public PessoaFisica editarPessoFisica(Long id, DadosCadastroPessoaFisica dadosCadastroPessoaFisica) {
+        Optional<PessoaFisica> pessoaFisicaOptional = pessoaFisicaRepository.findById((id));
+        PessoaFisica pessoaFisica = pessoaFisicaOptional.orElseThrow(() -> new DataIntegrityViolationException("PESSOA FÍSICA NÃO EXISTE."));
+        pessoaFisica.setNome(dadosCadastroPessoaFisica.nome());
+        pessoaFisica.setCpf(dadosCadastroPessoaFisica.cpf());
+        pessoaFisica.setEmail(dadosCadastroPessoaFisica.email());
+        pessoaFisica.setTelefone(dadosCadastroPessoaFisica.telefone());
+        Endereco endereco = getEnderco(dadosCadastroPessoaFisica.enderecoId());
+        pessoaFisica.setEndereco(endereco);
+        return pessoaFisicaRepository.save(pessoaFisica);
+    }
+
     private Endereco getEnderco(Long enderecoId) {
         Optional<Endereco> enderecoOptional = enderecoRepository.findById(enderecoId);
         return enderecoOptional.orElseThrow(() -> new DataIntegrityViolationException("ENDEREÇO NÃO EXISTE."));

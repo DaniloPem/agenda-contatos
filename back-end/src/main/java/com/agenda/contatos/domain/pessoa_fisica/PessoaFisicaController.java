@@ -1,5 +1,6 @@
 package com.agenda.contatos.domain.pessoa_fisica;
 
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,13 @@ public class PessoaFisicaController {
     }
 
     @PostMapping
-    public ResponseEntity<Long> criarPessoaFisica(DadosCadastroPessoaFisica dadosCadastroPessoaFisica) {
+    public ResponseEntity<Long> criarPessoaFisica(@RequestBody @Valid DadosCadastroPessoaFisica dadosCadastroPessoaFisica) {
         return ResponseEntity.ok(pessoaFisicaService.criarPessoaFisica(dadosCadastroPessoaFisica).getId());
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Long> editarPessoaFisica(@PathVariable Long id, @RequestBody @Valid DadosCadastroPessoaFisica dadosCadastroPessoaFisica) {
+        pessoaFisicaService.editarPessoFisica(id, dadosCadastroPessoaFisica);
+        return ResponseEntity.ok(id);
     }
 }
