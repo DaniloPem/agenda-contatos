@@ -30,5 +30,10 @@ public class PessoaFisicaController {
         return ResponseEntity.ok(id);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarPessoaFisica(@PathVariable Long id) {
+        pessoaFisicaService.deletarPessoaFisica(id);
+        return ResponseEntity.noContent().build();
+    }
 
 }

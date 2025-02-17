@@ -43,6 +43,13 @@ public class PessoaFisicaService {
         return pessoaFisicaRepository.save(pessoaFisica);
     }
 
+    public void deletarPessoaFisica(Long id) {
+        Optional<PessoaFisica> pessoaFisicaOptional = Optional.of(pessoaFisicaRepository.getReferenceById(id));
+        PessoaFisica pessoaFisica = pessoaFisicaOptional.orElseThrow(() -> new DataIntegrityViolationException("PESSOA FÍSICA NÃO EXISTE."));
+        pessoaFisica.deletarPessoaFisica();
+        pessoaFisicaRepository.save(pessoaFisica);
+    }
+
     private Endereco setDadosEndereco(Endereco endereco, DadosCadastroPessoaFisica dadosCadastroPessoaFisica) {
         endereco.setCep(dadosCadastroPessoaFisica.endereco().cep());
         endereco.setLogradouro(dadosCadastroPessoaFisica.endereco().logradouro());

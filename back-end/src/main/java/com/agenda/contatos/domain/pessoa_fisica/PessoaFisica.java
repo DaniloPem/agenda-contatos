@@ -3,8 +3,10 @@ package com.agenda.contatos.domain.pessoa_fisica;
 import com.agenda.contatos.domain.endereco.Endereco;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import org.hibernate.annotations.Where;
 
 @Entity
+@Where(clause = "deletado = FALSE")
 public class PessoaFisica {
 
     @Id
@@ -74,12 +76,15 @@ public class PessoaFisica {
     public Endereco getEndereco() {
         return endereco;
     }
-
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
 
     public Long getEnderecoId() {
         return endereco.getId();
+    }
+
+    public void deletarPessoaFisica() {
+        this.deletado = true;
     }
 }
