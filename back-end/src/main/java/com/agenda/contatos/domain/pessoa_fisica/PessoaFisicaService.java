@@ -3,9 +3,15 @@ package com.agenda.contatos.domain.pessoa_fisica;
 import com.agenda.contatos.domain.endereco.Endereco;
 import com.agenda.contatos.domain.endereco.EnderecoRepository;
 import jakarta.transaction.Transactional;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -24,6 +30,12 @@ public class PessoaFisicaService {
         Optional<PessoaFisica> pessoaFisicaOptional = pessoaFisicaRepository.findById(id);
         PessoaFisica pessoaFisica = pessoaFisicaOptional.orElseThrow(() -> new DataIntegrityViolationException("PESSOA FÍSCA NÃO EXISTE"));
         return new DadosVisualizacaoPessoaFisica(pessoaFisica);
+    }
+
+    public PessoaFisicaPageDTO listarAllPessoasFisicas(String filtro, @PositiveOrZero int pagina, @Positive @Max(30) int tamanho) {
+        Page<PessoaFisica> pessoaFisicaPage = pessoaFisicaRepository.findByFiltro(filtro + "%", PageRequest.of(pagina, tamanho));
+        List<DadosVisualizacaoPessoaFisica> pessoaFisicas = pessoaFisicaPage.map(DadosVisualizacaoPessoaFisica::new).toList();
+        return new PessoaFisicaPageDTO(pessoaFisicas, pessoaFisicaPage.getTotalElements(), pessoaFisicaPage.getTotalPages());
     }
 
     public PessoaFisica criarPessoaFisica(DadosCadastroPessoaFisica dadosCadastroPessoaFisica) {

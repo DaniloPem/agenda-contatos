@@ -1,6 +1,9 @@
 package com.agenda.contatos.domain.pessoa_fisica;
 
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +20,13 @@ public class PessoaFisicaController {
     @GetMapping("/{id}")
     public @ResponseBody DadosVisualizacaoPessoaFisica pegarPessoaFiscaPorId(@PathVariable Long id) {
         return pessoaFisicaService.pegarPessoaFisicaPorId(id);
+    }
+
+    @GetMapping()
+    public @ResponseBody PessoaFisicaPageDTO listarAllPessoasFisicas(@RequestParam String filtro,
+                                                                     @RequestParam(defaultValue = "0") @PositiveOrZero int pagina,
+                                                                     @RequestParam(defaultValue = "30") @Positive @Max(30) int tamanho) {
+        return pessoaFisicaService.listarAllPessoasFisicas(filtro, pagina, tamanho);
     }
 
     @PostMapping

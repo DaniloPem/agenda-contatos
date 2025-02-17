@@ -4,6 +4,7 @@ import com.agenda.contatos.domain.endereco.Endereco;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import org.hibernate.annotations.Where;
+import org.hibernate.validator.constraints.br.CPF;
 
 @Entity
 @Where(clause = "deletado = FALSE")
@@ -13,6 +14,7 @@ public class PessoaFisica {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
+    @CPF
     private String cpf;
     @Email
     private String email;
