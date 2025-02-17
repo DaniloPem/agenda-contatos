@@ -1,5 +1,6 @@
 package com.agenda.contatos.domain.pessoa_fisica;
 
+import com.agenda.contatos.domain.endereco.DadosCadastroEndereco;
 import com.agenda.contatos.domain.endereco.Endereco;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -14,6 +15,6 @@ public record DadosCadastroPessoaFisica(
         @NotBlank
         String telefone,
         @NotNull
-        Long enderecoId
+        DadosCadastroEndereco endereco
 ) {
 }

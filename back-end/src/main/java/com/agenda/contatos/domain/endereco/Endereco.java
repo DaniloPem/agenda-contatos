@@ -21,14 +21,14 @@ public class Endereco {
     public Endereco() {
     }
 
-    public Endereco(String cep, String logradouro, Integer numero, String complemento, String bairro, String cidade, String estado) {
-        this.cep = cep;
-        this.logradouro = logradouro;
-        this.numero = numero;
-        this.complemento = complemento;
-        this.bairro = bairro;
-        this.cidade = cidade;
-        this.estado = estado;
+    public Endereco(DadosCadastroEndereco dadosCadastroEndereco) {
+        this.cep = dadosCadastroEndereco.cep();
+        this.logradouro = dadosCadastroEndereco.logradouro();
+        this.numero = dadosCadastroEndereco.numero();
+        this.complemento = dadosCadastroEndereco.complemento();
+        this.bairro = dadosCadastroEndereco.bairro();
+        this.cidade = dadosCadastroEndereco.cidade();
+        this.estado = dadosCadastroEndereco.estado();
     }
 
     public Long getId() {

@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/db/pessoa-fisica")
+@RequestMapping("/api/pessoa-fisica")
 public class PessoaFisicaController {
 
     private final PessoaFisicaService pessoaFisicaService;
@@ -29,4 +29,6 @@ public class PessoaFisicaController {
         pessoaFisicaService.editarPessoFisica(id, dadosCadastroPessoaFisica);
         return ResponseEntity.ok(id);
     }
+
+
 }

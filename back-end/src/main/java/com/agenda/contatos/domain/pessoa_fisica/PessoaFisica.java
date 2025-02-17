@@ -18,6 +18,7 @@ public class PessoaFisica {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
+    private boolean deletado;
 
     public PessoaFisica() {}
 
@@ -27,6 +28,7 @@ public class PessoaFisica {
         this.email = dadosCadastroPessoaFisica.email();
         this.telefone = dadosCadastroPessoaFisica.telefone();
         this.endereco = endereco;
+        this.deletado = false;
     }
 
     public Long getId() {

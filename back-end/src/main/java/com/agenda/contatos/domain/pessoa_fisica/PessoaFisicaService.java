@@ -27,7 +27,7 @@ public class PessoaFisicaService {
     }
 
     public PessoaFisica criarPessoaFisica(DadosCadastroPessoaFisica dadosCadastroPessoaFisica) {
-        Endereco endereco = getEnderco(dadosCadastroPessoaFisica.enderecoId());
+        Endereco endereco = new Endereco(dadosCadastroPessoaFisica.endereco());
         PessoaFisica pessoaFisica = new PessoaFisica(dadosCadastroPessoaFisica, endereco);
         return pessoaFisicaRepository.save(pessoaFisica);
     }
@@ -39,14 +39,19 @@ public class PessoaFisicaService {
         pessoaFisica.setCpf(dadosCadastroPessoaFisica.cpf());
         pessoaFisica.setEmail(dadosCadastroPessoaFisica.email());
         pessoaFisica.setTelefone(dadosCadastroPessoaFisica.telefone());
-        Endereco endereco = getEnderco(dadosCadastroPessoaFisica.enderecoId());
-        pessoaFisica.setEndereco(endereco);
+        setDadosEndereco(pessoaFisica.getEndereco(), dadosCadastroPessoaFisica);
         return pessoaFisicaRepository.save(pessoaFisica);
     }
 
-    private Endereco getEnderco(Long enderecoId) {
-        Optional<Endereco> enderecoOptional = enderecoRepository.findById(enderecoId);
-        return enderecoOptional.orElseThrow(() -> new DataIntegrityViolationException("ENDEREÇO NÃO EXISTE."));
+    private Endereco setDadosEndereco(Endereco endereco, DadosCadastroPessoaFisica dadosCadastroPessoaFisica) {
+        endereco.setCep(dadosCadastroPessoaFisica.endereco().cep());
+        endereco.setLogradouro(dadosCadastroPessoaFisica.endereco().logradouro());
+        endereco.setNumero(dadosCadastroPessoaFisica.endereco().numero());
+        endereco.setComplemento(dadosCadastroPessoaFisica.endereco().complemento());
+        endereco.setBairro(dadosCadastroPessoaFisica.endereco().bairro());
+        endereco.setCidade(dadosCadastroPessoaFisica.endereco().cidade());
+        endereco.setEstado(dadosCadastroPessoaFisica.endereco().estado());
+        return enderecoRepository.save(endereco);
     }
 
 }
