@@ -1,4 +1,4 @@
-<mat-drawer-container class="example-container" autosize>
+<mat-drawer-container class="pagina-inicial-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side">
     <p>Auto-resizing sidenav</p>
     <button (click)="showFiller = !showFiller" mat-raised-button>
@@ -6,9 +6,9 @@
     </button>
   </mat-drawer>
 
-  <div class="example-sidenav-content">
+  <mat-drawer-content class="example-sidenav-content">
     <button type="button" mat-button (click)="drawer.toggle()">
       Toggle sidenav
     </button>
-  </div>
+  </mat-drawer-content>
 </mat-drawer-container>

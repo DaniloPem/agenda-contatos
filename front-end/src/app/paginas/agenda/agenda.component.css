@@ -1,4 +1,4 @@
-.example-container {
+.pagina-inicial-container {
   width: 100%;
   height: calc(100% - 64px);
 }
@@ -11,5 +11,5 @@
 }
 
 .example-sidenav {
-  padding: 20px;
+  width: 70%;
 }
