@@ -7,6 +7,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { AppRoutingModule } from './app-routing.module';
 import { NgxsModule } from '@ngxs/store';
 import { HttpClientModule } from '@angular/common/http';
+import { FormularioApagarContatoComponent } from './componentes/formulario-apagar-contato/formulario-apagar-contato.component';
 
 @NgModule({
   declarations: [AppComponent],

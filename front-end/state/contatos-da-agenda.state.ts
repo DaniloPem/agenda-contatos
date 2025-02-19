@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import {
   AddContato,
+  DeleteContato,
   GetContato,
   GetListaContatos,
   UpdateContato,
@@ -115,6 +116,22 @@ export class ContatosDaAgendaState {
       });
   }
 
+  @Action(DeleteContato)
+  deleteContato(
+    { getState, setState }: StateContext<ContatosDaAgendaStateModel>,
+    { payload }: DeleteContato
+  ) {
+    return this.contatosDaAgendaService
+      .deleteContato(payload.id)
+      .subscribe(() => {
+        this.contatoSalvoComSucesso('delete');
+        const contatoFoiApagado = true;
+        payload.dialogRef.close(contatoFoiApagado);
+        const state = getState();
+        setState({ ...state });
+      });
+  }
+
   private contatoSalvoComSucesso(action: string) {
     let mensagem: string = '';
     switch (action) {
@@ -123,6 +140,9 @@ export class ContatosDaAgendaState {
         break;
       case 'update':
         mensagem = 'atualizado';
+        break;
+      case 'delete':
+        mensagem = 'apagado';
         break;
     }
     this.snackbar.open(`Contato ${mensagem} com sucesso.`, '', {

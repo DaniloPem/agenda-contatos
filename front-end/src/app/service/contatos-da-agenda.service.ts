@@ -43,4 +43,8 @@ export class ContatosDaAgendaService {
       contatoRecord
     );
   }
+
+  deleteContato(id: number) {
+    return this.httpClient.delete(`${this.API}/${id}`);
+  }
 }

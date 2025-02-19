@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Apagar contato</h2>
+<mat-dialog-content>
+  <p>
+    Tem certeza de que deseja apagar este contato:
+    <strong> {{ contato.nome }}</strong
+    >?
+  </p>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-button (click)="apagarContato()" cdkFocusInitial color="primary">
+    Apagar
+  </button>
+</mat-dialog-actions>

@@ -20,7 +20,7 @@ export class GetContato {
 }
 
 export class AddContato {
-  static readonly type = '[Contato] Add';
+  static readonly type = '[Contato] Post';
   constructor(
     public payload: {
       contato: Partial<ContatoCadastro>;
@@ -34,6 +34,16 @@ export class UpdateContato {
   constructor(
     public payload: {
       contato: Partial<DadosVisualizacaoPessoaFisica>;
+      dialogRef: MatDialogRef<any>;
+    }
+  ) {}
+}
+
+export class DeleteContato {
+  static readonly type = '[Contato] Delete';
+  constructor(
+    public payload: {
+      id: number;
       dialogRef: MatDialogRef<any>;
     }
   ) {}

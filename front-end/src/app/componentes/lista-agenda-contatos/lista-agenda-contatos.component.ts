@@ -10,6 +10,7 @@ import { PessoasFisicasPagina } from 'src/app/model/pessoas-fisicas-pagina';
 import { GetListaContatos } from 'state/contatos-da-agenda.actions';
 import { ContatosDaAgendaState } from 'state/contatos-da-agenda.state';
 import { FormularioNovoContatoComponent } from '../formulario-add-update-contato/formulario-novo-contato.component';
+import { FormularioApagarContatoComponent } from '../formulario-apagar-contato/formulario-apagar-contato.component';
 
 @Component({
   selector: 'app-lista-agenda-contatos',
@@ -90,8 +91,22 @@ export class ListaAgendaContatosComponent implements AfterViewInit {
         disableClose: true,
       })
       .afterClosed()
-      .subscribe((result) => {
-        if (result) {
+      .subscribe((contatoFoiAtualizado) => {
+        if (contatoFoiAtualizado) {
+          this.carregarPaginaComListaDeContatos();
+        }
+      });
+  }
+
+  openDialogDeleteContato(contato: any) {
+    this.matDialog
+      .open(FormularioApagarContatoComponent, {
+        data: contato,
+        width: '50%',
+      })
+      .afterClosed()
+      .subscribe((contatoFoiApagado) => {
+        if (contatoFoiApagado) {
           this.carregarPaginaComListaDeContatos();
         }
       });

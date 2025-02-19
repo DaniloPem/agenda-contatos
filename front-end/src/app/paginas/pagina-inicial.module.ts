@@ -18,12 +18,14 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FormularioNovoContatoComponent } from '../componentes/formulario-add-update-contato/formulario-novo-contato.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { FormularioApagarContatoComponent } from '../componentes/formulario-apagar-contato/formulario-apagar-contato.component';
 
 @NgModule({
   declarations: [
     AgendaComponent,
     ListaAgendaContatosComponent,
     FormularioNovoContatoComponent,
+    FormularioApagarContatoComponent,
   ],
   imports: [
     CommonModule,
