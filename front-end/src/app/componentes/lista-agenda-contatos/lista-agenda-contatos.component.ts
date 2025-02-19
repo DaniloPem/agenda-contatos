@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Select, Store } from '@ngxs/store';
@@ -8,6 +9,7 @@ import { DadosVisualizacaoPessoaFisica } from 'src/app/model/dados-visualizacao-
 import { PessoasFisicasPagina } from 'src/app/model/pessoas-fisicas-pagina';
 import { GetListaContatos } from 'state/contatos-da-agenda.actions';
 import { ContatosDaAgendaState } from 'state/contatos-da-agenda.state';
+import { FormularioNovoContatoComponent } from '../formulario-novo-contato/formulario-novo-contato.component';
 
 @Component({
   selector: 'app-lista-agenda-contatos',
@@ -41,7 +43,7 @@ export class ListaAgendaContatosComponent implements AfterViewInit {
   @Select(ContatosDaAgendaState.getListaDeContatos)
   paginaDeListaDeContatos!: Observable<PessoasFisicasPagina>;
 
-  constructor(private store: Store) {
+  constructor(private store: Store, private matDialog: MatDialog) {
     this.iniciarValuesChangesFiltro();
   }
 
@@ -64,5 +66,18 @@ export class ListaAgendaContatosComponent implements AfterViewInit {
     const pagina = this.paginator.pageIndex ?? 0;
     const tamanho = this.paginator.pageSize ?? 30;
     this.store.dispatch(new GetListaContatos({ filtro, pagina, tamanho }));
+  }
+
+  openDialogAddNovoContato() {
+    this.matDialog
+      .open(FormularioNovoContatoComponent, {
+        width: '50%',
+      })
+      .afterClosed()
+      .subscribe((contatoFoiAdicionado) => {
+        if (contatoFoiAdicionado) {
+          this.pegarPaginaComListaDeContatos();
+        }
+      });
   }
 }

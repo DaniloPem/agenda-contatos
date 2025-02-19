@@ -10,7 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormularioNovoContatoComponent } from './componentes/formulario-novo-contato/formulario-novo-contato.component';
 
 @NgModule({
-  declarations: [AppComponent, FormularioNovoContatoComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

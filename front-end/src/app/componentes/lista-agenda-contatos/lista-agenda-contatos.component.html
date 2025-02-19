@@ -4,7 +4,12 @@
       <mat-label>Buscar por nome ou CPF</mat-label>
       <input matInput #input [formControl]="filtroListaDeContatosControl" />
     </mat-form-field>
-    <button mat-flat-button class="botao-novo-contato" color="primary">
+    <button
+      mat-flat-button
+      class="botao-novo-contato"
+      color="primary"
+      (click)="openDialogAddNovoContato()"
+    >
       Novo Contato
     </button>
   </div>

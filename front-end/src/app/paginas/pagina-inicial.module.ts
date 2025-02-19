@@ -14,9 +14,17 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormularioNovoContatoComponent } from '../componentes/formulario-novo-contato/formulario-novo-contato.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
-  declarations: [AgendaComponent, ListaAgendaContatosComponent],
+  declarations: [
+    AgendaComponent,
+    ListaAgendaContatosComponent,
+    FormularioNovoContatoComponent,
+  ],
   imports: [
     CommonModule,
     PaginaInicialRoutingModule,
@@ -30,6 +38,9 @@ import { MatInputModule } from '@angular/material/input';
     MatIconModule,
     MatTooltipModule,
     MatInputModule,
+    MatDialogModule,
+    MatCardModule,
+    MatSnackBarModule,
   ],
 })
 export class PaginaInicialModule {}
