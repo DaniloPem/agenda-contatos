@@ -5,6 +5,7 @@ export interface DadosVisualizacaoPessoaFisica {
   email: string;
   telefone: string;
   enderecoId: number;
+  enderecoCep: string;
   enderecoLogradouro: string;
   enderecoNumero: number;
   enderecoComplemento: string;

@@ -1,6 +1,6 @@
 <h2 mat-dialog-title>Adicionar novo contato</h2>
 <mat-dialog-content>
-  <form *ngIf="contatoNovoForm !== undefined" [formGroup]="contatoNovoForm">
+  <form *ngIf="contatoForm !== undefined" [formGroup]="contatoForm">
     <mat-card class="formulario-personal-data" appearance="outlined">
       <mat-card-header>
         <mat-card-subtitle>Dados Pessoais</mat-card-subtitle>
@@ -9,14 +9,14 @@
         <mat-form-field appearance="outline" class="formulario-nome">
           <mat-label>Nome completo:</mat-label>
           <input type="text" formControlName="nome" matInput />
-          <mat-error *ngIf="contatoNovoForm.get('nome')?.hasError('required')"
+          <mat-error *ngIf="contatoForm.get('nome')?.hasError('required')"
             >Nome é <strong>requerido</strong>.</mat-error
           >
         </mat-form-field>
         <mat-form-field appearance="outline" class="formulario-cpf">
           <mat-label>CPF:</mat-label>
           <input type="text" formControlName="cpf" matInput />
-          <mat-error *ngIf="contatoNovoForm.get('cpf')?.hasError('required')"
+          <mat-error *ngIf="contatoForm.get('cpf')?.hasError('required')"
             >CPF é <strong>requerido</strong>.</mat-error
           >
         </mat-form-field>
@@ -28,18 +28,17 @@
             matInput
             placeholder="Ex. abcde@email.com"
           />
-          <mat-error *ngIf="contatoNovoForm.get('email')?.hasError('required')"
+          <mat-error *ngIf="contatoForm.get('email')?.hasError('required')"
             >Email é <strong>requerido</strong>.</mat-error
           >
-          <mat-error *ngIf="contatoNovoForm.get('email')?.hasError('email')"
+          <mat-error *ngIf="contatoForm.get('email')?.hasError('email')"
             >Por favor, insira um email correto.
           </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline" class="formulario-telefone">
           <mat-label>Telefone:</mat-label>
           <input type="text" formControlName="telefone" matInput />
-          <mat-error
-            *ngIf="contatoNovoForm.get('telefone')?.hasError('required')"
+          <mat-error *ngIf="contatoForm.get('telefone')?.hasError('required')"
             >Telefone é <strong>requerido</strong>.</mat-error
           >
         </mat-form-field>
@@ -57,10 +56,7 @@
             <input type="text" formControlName="cep" matInput />
             <mat-error
               *ngIf="
-                contatoNovoForm
-                  .get('endereco')
-                  ?.get('cep')
-                  ?.hasError('required')
+                contatoForm.get('endereco')?.get('cep')?.hasError('required')
               "
               >CEP é <strong>requerido</strong>.</mat-error
             >
@@ -71,7 +67,7 @@
             <input type="text" formControlName="logradouro" matInput />
             <mat-error
               *ngIf="
-                contatoNovoForm
+                contatoForm
                   .get('endereco')
                   ?.get('logradouro')
                   ?.hasError('required')
@@ -85,10 +81,7 @@
             <input type="number" formControlName="numero" matInput />
             <mat-error
               *ngIf="
-                contatoNovoForm
-                  .get('endereco')
-                  ?.get('numero')
-                  ?.hasError('required')
+                contatoForm.get('endereco')?.get('numero')?.hasError('required')
               "
               >Número é <strong>requerido</strong>.</mat-error
             >
@@ -104,10 +97,7 @@
             <input type="text" formControlName="bairro" matInput />
             <mat-error
               *ngIf="
-                contatoNovoForm
-                  .get('endereco')
-                  ?.get('bairro')
-                  ?.hasError('required')
+                contatoForm.get('endereco')?.get('bairro')?.hasError('required')
               "
               >Bairro é <strong>requerido</strong>.</mat-error
             >
@@ -118,10 +108,7 @@
             <input type="text" formControlName="cidade" matInput />
             <mat-error
               *ngIf="
-                contatoNovoForm
-                  .get('endereco')
-                  ?.get('cidade')
-                  ?.hasError('required')
+                contatoForm.get('endereco')?.get('cidade')?.hasError('required')
               "
               >Cidade é <strong>requerido</strong>.</mat-error
             >
@@ -132,10 +119,7 @@
             <input type="text" formControlName="estado" matInput />
             <mat-error
               *ngIf="
-                contatoNovoForm
-                  .get('endereco')
-                  ?.get('estado')
-                  ?.hasError('required')
+                contatoForm.get('endereco')?.get('estado')?.hasError('required')
               "
               >Estado é <strong>requerido</strong>.</mat-error
             >
@@ -146,7 +130,23 @@
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button (click)="salvarContato()" cdkFocusInitial color="primary">
-    Save
+  <button
+    *ngIf="!contatoId"
+    mat-button
+    (click)="adicionarNovoContato()"
+    cdkFocusInitial
+    color="primary"
+  >
+    Adicionar
+  </button>
+  <button *ngIf="contatoId" mat-button mat-dialog-close>Cancelar</button>
+  <button
+    *ngIf="contatoId"
+    mat-button
+    (click)="editarContato()"
+    cdkFocusInitial
+    color="primary"
+  >
+    Editar
   </button>
 </mat-dialog-actions>

@@ -2,11 +2,19 @@ import { PessoasFisicasPagina } from './../src/app/model/pessoas-fisicas-pagina'
 import { ContatosDaAgendaService } from './../src/app/service/contatos-da-agenda.service';
 import { Injectable } from '@angular/core';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
-import { AddContato, GetListaContatos } from './contatos-da-agenda.actions';
+import {
+  AddContato,
+  GetContato,
+  GetListaContatos,
+  UpdateContato,
+} from './contatos-da-agenda.actions';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DadosVisualizacaoPessoaFisica } from 'src/app/model/dados-visualizacao-pessoa-fisica';
+import { FormBuilder } from '@angular/forms';
 
 export class ContatosDaAgendaStateModel {
   public paginaDeContatos!: PessoasFisicasPagina;
+  public contato!: any;
   public contatoAdicionado!: boolean;
 }
 
@@ -18,6 +26,7 @@ export class ContatosDaAgendaStateModel {
       totalPaginas: 0,
       totalPessoasFisicas: 0,
     },
+    contato: {},
     contatoAdicionado: false,
   },
 })
@@ -25,7 +34,8 @@ export class ContatosDaAgendaStateModel {
 export class ContatosDaAgendaState {
   constructor(
     private contatosDaAgendaService: ContatosDaAgendaService,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private formBuilder: FormBuilder
   ) {}
 
   @Selector()
@@ -33,6 +43,13 @@ export class ContatosDaAgendaState {
     state: ContatosDaAgendaStateModel
   ): PessoasFisicasPagina {
     return state.paginaDeContatos;
+  }
+
+  @Selector()
+  static getContato(
+    state: ContatosDaAgendaStateModel
+  ): DadosVisualizacaoPessoaFisica {
+    return state.contato;
   }
 
   @Selector()
@@ -53,6 +70,19 @@ export class ContatosDaAgendaState {
       });
   }
 
+  @Action(GetContato)
+  getContato(
+    { getState, setState }: StateContext<ContatosDaAgendaStateModel>,
+    { payload }: GetContato
+  ) {
+    return this.contatosDaAgendaService
+      .getContato(payload.id)
+      .subscribe((res: DadosVisualizacaoPessoaFisica) => {
+        const state = getState();
+        setState({ ...state, contato: res });
+      });
+  }
+
   @Action(AddContato)
   addNovoContato(
     { getState, setState }: StateContext<ContatosDaAgendaStateModel>,
@@ -61,7 +91,7 @@ export class ContatosDaAgendaState {
     return this.contatosDaAgendaService
       .addNovoContato(payload.contato)
       .subscribe(() => {
-        this.contatoSalvoComSucesso();
+        this.contatoSalvoComSucesso('add');
         const contatoFoiCriado = true;
         payload.dialogRef.close(contatoFoiCriado);
         const state = getState();
@@ -69,8 +99,33 @@ export class ContatosDaAgendaState {
       });
   }
 
-  private contatoSalvoComSucesso() {
-    this.snackbar.open('Contato adicionado com sucesso.', '', {
+  @Action(UpdateContato)
+  updateContato(
+    { getState, setState }: StateContext<ContatosDaAgendaStateModel>,
+    { payload }: UpdateContato
+  ) {
+    return this.contatosDaAgendaService
+      .updateContato(payload.contato)
+      .subscribe(() => {
+        this.contatoSalvoComSucesso('update');
+        const contatoFoiAtualizado = true;
+        payload.dialogRef.close(contatoFoiAtualizado);
+        const state = getState();
+        setState({ ...state });
+      });
+  }
+
+  private contatoSalvoComSucesso(action: string) {
+    let mensagem: string = '';
+    switch (action) {
+      case 'add':
+        mensagem = 'adicionado';
+        break;
+      case 'update':
+        mensagem = 'atualizado';
+        break;
+    }
+    this.snackbar.open(`Contato ${mensagem} com sucesso.`, '', {
       duration: 2000,
     });
   }

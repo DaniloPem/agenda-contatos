@@ -9,7 +9,7 @@ import { DadosVisualizacaoPessoaFisica } from 'src/app/model/dados-visualizacao-
 import { PessoasFisicasPagina } from 'src/app/model/pessoas-fisicas-pagina';
 import { GetListaContatos } from 'state/contatos-da-agenda.actions';
 import { ContatosDaAgendaState } from 'state/contatos-da-agenda.state';
-import { FormularioNovoContatoComponent } from '../formulario-novo-contato/formulario-novo-contato.component';
+import { FormularioNovoContatoComponent } from '../formulario-add-update-contato/formulario-novo-contato.component';
 
 @Component({
   selector: 'app-lista-agenda-contatos',
@@ -22,6 +22,7 @@ export class ListaAgendaContatosComponent implements AfterViewInit {
     'cpf',
     'email',
     'telefone',
+    'cep',
     'endereco',
     'complemento',
     'bairro',
@@ -48,20 +49,20 @@ export class ListaAgendaContatosComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.pegarPaginaComListaDeContatos();
+    this.carregarPaginaComListaDeContatos();
   }
 
   iniciarValuesChangesFiltro() {
     this.filtroListaDeContatosControl.valueChanges
       .pipe(debounceTime(1500))
       .subscribe(() => {
-        this.pegarPaginaComListaDeContatos();
+        this.carregarPaginaComListaDeContatos();
         this.pageIndex = this.paginator.pageIndex;
         this.pageSize = this.paginator.pageSize;
       });
   }
 
-  pegarPaginaComListaDeContatos() {
+  carregarPaginaComListaDeContatos() {
     const filtro = this.filtroListaDeContatosControl.value ?? '';
     const pagina = this.paginator.pageIndex ?? 0;
     const tamanho = this.paginator.pageSize ?? 30;
@@ -76,7 +77,22 @@ export class ListaAgendaContatosComponent implements AfterViewInit {
       .afterClosed()
       .subscribe((contatoFoiAdicionado) => {
         if (contatoFoiAdicionado) {
-          this.pegarPaginaComListaDeContatos();
+          this.carregarPaginaComListaDeContatos();
+        }
+      });
+  }
+
+  openDialogUpdateContato(contato: any) {
+    this.matDialog
+      .open(FormularioNovoContatoComponent, {
+        data: contato,
+        width: '50%',
+        disableClose: true,
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          this.carregarPaginaComListaDeContatos();
         }
       });
   }

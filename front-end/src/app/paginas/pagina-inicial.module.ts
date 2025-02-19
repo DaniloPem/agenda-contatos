@@ -15,7 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialogModule } from '@angular/material/dialog';
-import { FormularioNovoContatoComponent } from '../componentes/formulario-novo-contato/formulario-novo-contato.component';
+import { FormularioNovoContatoComponent } from '../componentes/formulario-add-update-contato/formulario-novo-contato.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 

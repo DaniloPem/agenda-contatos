@@ -7,7 +7,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { AppRoutingModule } from './app-routing.module';
 import { NgxsModule } from '@ngxs/store';
 import { HttpClientModule } from '@angular/common/http';
-import { FormularioNovoContatoComponent } from './componentes/formulario-novo-contato/formulario-novo-contato.component';
 
 @NgModule({
   declarations: [AppComponent],

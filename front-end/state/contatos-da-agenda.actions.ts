@@ -1,10 +1,21 @@
+import { FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ContatoCadastro } from 'src/app/model/contato-cadastro';
+import { DadosVisualizacaoPessoaFisica } from 'src/app/model/dados-visualizacao-pessoa-fisica';
 
 export class GetListaContatos {
   static readonly type = '[Contatos] Get';
   constructor(
     public payload: { filtro: string; pagina: number; tamanho: number }
+  ) {}
+}
+
+export class GetContato {
+  static readonly type = '[Contato] Get';
+  constructor(
+    public payload: {
+      id: number;
+    }
   ) {}
 }
 
@@ -22,7 +33,7 @@ export class UpdateContato {
   static readonly type = '[Contato] Update';
   constructor(
     public payload: {
-      contato: Partial<ContatoCadastro>;
+      contato: Partial<DadosVisualizacaoPessoaFisica>;
       dialogRef: MatDialogRef<any>;
     }
   ) {}
