@@ -34,4 +34,13 @@ export class ContatosDaAgendaService {
   addNovoContato(contatoRecord: Partial<ContatoCadastro>): Observable<number> {
     return this.httpClient.post<number>(`${this.API}`, contatoRecord);
   }
+
+  updateContato(
+    contatoRecord: Partial<DadosVisualizacaoPessoaFisica>
+  ): Observable<number> {
+    return this.httpClient.put<number>(
+      `${this.API}/${contatoRecord.id}`,
+      contatoRecord
+    );
+  }
 }
