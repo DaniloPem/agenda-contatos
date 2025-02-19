@@ -3,6 +3,8 @@ import { ContatosDaAgendaService } from './../src/app/service/contatos-da-agenda
 import { Injectable } from '@angular/core';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { GetListaContatos } from './contatos-da-agenda.actions';
+import { Observable, of } from 'rxjs';
+import { DadosVisualizacaoPessoaFisica } from 'src/app/model/dados-visualizacao-pessoa-fisica';
 
 export class ContatosDaAgendaStateModel {
   public paginaDeContatos!: PessoasFisicasPagina;
@@ -23,7 +25,9 @@ export class ContatosDaAgendaState {
   constructor(private contatosDaAgendaService: ContatosDaAgendaService) {}
 
   @Selector()
-  static getListaDeContatos(state: ContatosDaAgendaStateModel) {
+  static getListaDeContatos(
+    state: ContatosDaAgendaStateModel
+  ): PessoasFisicasPagina {
     return state.paginaDeContatos;
   }
 
