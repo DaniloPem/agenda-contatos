@@ -3,7 +3,6 @@ import { ContatosDaAgendaService } from './../src/app/service/contatos-da-agenda
 import { Injectable } from '@angular/core';
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 import { AddContato, GetListaContatos } from './contatos-da-agenda.actions';
-import { ContatoCadastro } from 'src/app/model/contato-cadastro';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 export class ContatosDaAgendaStateModel {

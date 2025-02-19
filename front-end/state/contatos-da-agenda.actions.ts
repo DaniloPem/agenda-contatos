@@ -17,3 +17,13 @@ export class AddContato {
     }
   ) {}
 }
+
+export class UpdateContato {
+  static readonly type = '[Contato] Update';
+  constructor(
+    public payload: {
+      contato: Partial<ContatoCadastro>;
+      dialogRef: MatDialogRef<any>;
+    }
+  ) {}
+}

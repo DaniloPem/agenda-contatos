@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PessoasFisicasPagina } from '../model/pessoas-fisicas-pagina';
 import { ContatoCadastro } from '../model/contato-cadastro';
+import { DadosVisualizacaoPessoaFisica } from '../model/dados-visualizacao-pessoa-fisica';
 
 @Injectable({
   providedIn: 'root',
@@ -22,6 +23,12 @@ export class ContatosDaAgendaService {
       .set('pagina', pagina)
       .set('tamanho', tamanho);
     return this.httpClient.get<PessoasFisicasPagina>(`${this.API}`, { params });
+  }
+
+  getContato(id: number): Observable<DadosVisualizacaoPessoaFisica> {
+    return this.httpClient.get<DadosVisualizacaoPessoaFisica>(
+      `${this.API}/${id}`
+    );
   }
 
   addNovoContato(contatoRecord: Partial<ContatoCadastro>): Observable<number> {
