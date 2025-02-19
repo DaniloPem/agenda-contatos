@@ -25,6 +25,7 @@ export class ListaAgendaContatosComponent implements AfterViewInit {
     'bairro',
     'cidade',
     'estado',
+    'actions',
   ];
 
   dataSource!: MatTableDataSource<DadosVisualizacaoPessoaFisica>;

@@ -4,7 +4,13 @@
   </mat-drawer>
 
   <mat-drawer-content class="lista-de-contatos">
-    <button type="button" mat-raised-button (click)="drawer.toggle()">
+    <button
+      type="button"
+      class="botao-mostrar-mapa"
+      color="primary"
+      mat-raised-button
+      (click)="drawer.toggle()"
+    >
       Mostrar Mapa
     </button>
     <app-lista-agenda-contatos></app-lista-agenda-contatos>

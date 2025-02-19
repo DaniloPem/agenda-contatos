@@ -1,0 +1,15 @@
+.filter-e-botao-novo-contato-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.tabela-lista-contatos {
+  height: calc(100vh - 64px - 78px - 56px - 48px);
+  overflow-y: auto;
+}
+
+.mat-column-actions {
+  min-width: 129px;
+}
