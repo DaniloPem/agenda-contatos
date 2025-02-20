@@ -27,8 +27,7 @@ export class ListaAgendaContatosComponent implements AfterViewInit {
     'endereco',
     'complemento',
     'bairro',
-    'cidade',
-    'estado',
+    'cidadeEstado',
     'actions',
   ];
 

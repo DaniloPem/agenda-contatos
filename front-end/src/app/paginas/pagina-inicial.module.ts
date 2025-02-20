@@ -20,6 +20,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormularioApagarContatoComponent } from '../componentes/formulario-apagar-contato/formulario-apagar-contato.component';
 import { NgxMaskModule } from 'ngx-mask';
+import { CpfPipe } from '../pipe/cpf.pipe';
+import { TelefonePipe } from '../pipe/telefone.pipe';
+import { CepPipe } from '../pipe/cep.pipe';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,9 @@ import { NgxMaskModule } from 'ngx-mask';
     ListaAgendaContatosComponent,
     FormularioNovoContatoComponent,
     FormularioApagarContatoComponent,
+    CpfPipe,
+    TelefonePipe,
+    CepPipe,
   ],
   imports: [
     CommonModule,
