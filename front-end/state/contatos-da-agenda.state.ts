@@ -12,6 +12,7 @@ import {
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DadosVisualizacaoPessoaFisica } from 'src/app/model/dados-visualizacao-pessoa-fisica';
 import { FormBuilder } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
 
 export class ContatosDaAgendaStateModel {
   public paginaDeContatos!: PessoasFisicasPagina;
@@ -91,12 +92,15 @@ export class ContatosDaAgendaState {
   ) {
     return this.contatosDaAgendaService
       .addNovoContato(payload.contato)
-      .subscribe(() => {
-        this.contatoSalvoComSucesso('add');
-        const contatoFoiCriado = true;
-        payload.dialogRef.close(contatoFoiCriado);
-        const state = getState();
-        setState({ ...state });
+      .subscribe({
+        next: () => {
+          this.contatoSalvoComSucesso('add');
+          const contatoFoiCriado = true;
+          payload.dialogRef.close(contatoFoiCriado);
+          const state = getState();
+          setState({ ...state });
+        },
+        error: (exception) => this.mostrarExceptionErro(exception),
       });
   }
 
@@ -107,12 +111,15 @@ export class ContatosDaAgendaState {
   ) {
     return this.contatosDaAgendaService
       .updateContato(payload.contato)
-      .subscribe(() => {
-        this.contatoSalvoComSucesso('update');
-        const contatoFoiAtualizado = true;
-        payload.dialogRef.close(contatoFoiAtualizado);
-        const state = getState();
-        setState({ ...state });
+      .subscribe({
+        next: () => {
+          this.contatoSalvoComSucesso('update');
+          const contatoFoiAtualizado = true;
+          payload.dialogRef.close(contatoFoiAtualizado);
+          const state = getState();
+          setState({ ...state });
+        },
+        error: (exception) => this.mostrarExceptionErro(exception),
       });
   }
 
@@ -121,15 +128,16 @@ export class ContatosDaAgendaState {
     { getState, setState }: StateContext<ContatosDaAgendaStateModel>,
     { payload }: DeleteContato
   ) {
-    return this.contatosDaAgendaService
-      .deleteContato(payload.id)
-      .subscribe(() => {
+    return this.contatosDaAgendaService.deleteContato(payload.id).subscribe({
+      next: () => {
         this.contatoSalvoComSucesso('delete');
         const contatoFoiApagado = true;
         payload.dialogRef.close(contatoFoiApagado);
         const state = getState();
         setState({ ...state });
-      });
+      },
+      error: (exception) => this.mostrarExceptionErro(exception),
+    });
   }
 
   private contatoSalvoComSucesso(action: string) {
@@ -148,5 +156,11 @@ export class ContatosDaAgendaState {
     this.snackbar.open(`Contato ${mensagem} com sucesso.`, '', {
       duration: 2000,
     });
+  }
+
+  private mostrarExceptionErro(exception: HttpErrorResponse) {
+    const mensagem = exception.error.mensagem;
+
+    this.snackbar.open(`ERRO: ${mensagem}`, '', { duration: 3000 });
   }
 }

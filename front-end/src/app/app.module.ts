@@ -7,7 +7,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { AppRoutingModule } from './app-routing.module';
 import { NgxsModule } from '@ngxs/store';
 import { HttpClientModule } from '@angular/common/http';
-import { FormularioApagarContatoComponent } from './componentes/formulario-apagar-contato/formulario-apagar-contato.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,6 +15,7 @@ import { FormularioApagarContatoComponent } from './componentes/formulario-apaga
     BrowserModule,
     BrowserAnimationsModule,
     NgxsModule.forRoot([], {}),
+    NgxMaskModule.forRoot(),
     MatToolbarModule,
     AppRoutingModule,
     HttpClientModule,

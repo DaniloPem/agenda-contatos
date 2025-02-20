@@ -15,7 +15,13 @@
         </mat-form-field>
         <mat-form-field appearance="outline" class="formulario-cpf">
           <mat-label>CPF:</mat-label>
-          <input type="text" formControlName="cpf" matInput />
+          <input
+            type="text"
+            formControlName="cpf"
+            matInput
+            onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+            mask="000.000.000-00"
+          />
           <mat-error *ngIf="contatoForm.get('cpf')?.hasError('required')"
             >CPF é <strong>requerido</strong>.</mat-error
           >
@@ -37,7 +43,14 @@
         </mat-form-field>
         <mat-form-field appearance="outline" class="formulario-telefone">
           <mat-label>Telefone:</mat-label>
-          <input type="text" formControlName="telefone" matInput />
+          <input
+            type="text"
+            formControlName="telefone"
+            matInput
+            onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+            placeholder="(00) 90000-0000"
+            mask="(00) 00000-0000||(00) 0000-0000"
+          />
           <mat-error *ngIf="contatoForm.get('telefone')?.hasError('required')"
             >Telefone é <strong>requerido</strong>.</mat-error
           >
@@ -53,7 +66,14 @@
         <mat-card-content>
           <mat-form-field appearance="outline" class="formulario-cep">
             <mat-label>CEP:</mat-label>
-            <input type="text" formControlName="cep" matInput />
+            <input
+              type="text"
+              formControlName="cep"
+              matInput
+              onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+              placeholder="00000-000"
+              mask="00000-000"
+            />
             <mat-error
               *ngIf="
                 contatoForm.get('endereco')?.get('cep')?.hasError('required')

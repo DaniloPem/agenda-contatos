@@ -19,6 +19,7 @@ import { FormularioNovoContatoComponent } from '../componentes/formulario-add-up
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormularioApagarContatoComponent } from '../componentes/formulario-apagar-contato/formulario-apagar-contato.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { FormularioApagarContatoComponent } from '../componentes/formulario-apag
     PaginaInicialRoutingModule,
     ReactiveFormsModule,
     NgxsModule.forFeature([ContatosDaAgendaState]),
+    NgxMaskModule.forChild(),
     MatSidenavModule,
     MatButtonModule,
     MatTableModule,
