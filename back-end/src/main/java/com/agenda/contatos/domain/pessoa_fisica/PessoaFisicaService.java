@@ -28,7 +28,7 @@ public class PessoaFisicaService {
 
     public DadosVisualizacaoPessoaFisica pegarPessoaFisicaPorId(Long id) {
         Optional<PessoaFisica> pessoaFisicaOptional = pessoaFisicaRepository.findById(id);
-        PessoaFisica pessoaFisica = pessoaFisicaOptional.orElseThrow(() -> new DataIntegrityViolationException("PESSOA FÍSCA NÃO EXISTE"));
+        PessoaFisica pessoaFisica = pessoaFisicaOptional.orElseThrow(() -> new DataIntegrityViolationException("CONTATO NÃO EXISTE."));
         return new DadosVisualizacaoPessoaFisica(pessoaFisica);
     }
 
@@ -46,7 +46,7 @@ public class PessoaFisicaService {
 
     public PessoaFisica editarPessoFisica(Long id, DadosCadastroPessoaFisica dadosCadastroPessoaFisica) {
         Optional<PessoaFisica> pessoaFisicaOptional = pessoaFisicaRepository.findById((id));
-        PessoaFisica pessoaFisica = pessoaFisicaOptional.orElseThrow(() -> new DataIntegrityViolationException("PESSOA FÍSICA NÃO EXISTE."));
+        PessoaFisica pessoaFisica = pessoaFisicaOptional.orElseThrow(() -> new DataIntegrityViolationException("CONTATO NÃO EXISTE."));
         pessoaFisica.setNome(dadosCadastroPessoaFisica.nome());
         pessoaFisica.setCpf(dadosCadastroPessoaFisica.cpf());
         pessoaFisica.setEmail(dadosCadastroPessoaFisica.email());
@@ -56,8 +56,8 @@ public class PessoaFisicaService {
     }
 
     public void deletarPessoaFisica(Long id) {
-        Optional<PessoaFisica> pessoaFisicaOptional = Optional.of(pessoaFisicaRepository.getReferenceById(id));
-        PessoaFisica pessoaFisica = pessoaFisicaOptional.orElseThrow(() -> new DataIntegrityViolationException("PESSOA FÍSICA NÃO EXISTE."));
+        Optional<PessoaFisica> pessoaFisicaOptional = pessoaFisicaRepository.findById(id);
+        PessoaFisica pessoaFisica = pessoaFisicaOptional.orElseThrow(() -> new DataIntegrityViolationException("CONTATO NÃO EXISTE."));
         pessoaFisica.deletarPessoaFisica();
         pessoaFisicaRepository.save(pessoaFisica);
     }

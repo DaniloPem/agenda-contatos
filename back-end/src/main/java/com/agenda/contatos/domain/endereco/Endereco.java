@@ -2,12 +2,14 @@ package com.agenda.contatos.domain.endereco;
 
 import com.agenda.contatos.domain.pessoa_fisica.PessoaFisica;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Size(min = 8, max = 8, message = "CEP inválido.")
     private String cep;
     private String logradouro;
     private Integer numero;

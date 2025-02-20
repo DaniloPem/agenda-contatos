@@ -6,7 +6,15 @@ public record DadosVisualizacaoPessoaFisica(
         String cpf,
         String email,
         String telefone,
-        Long enderecoId
+        Long enderecoId,
+        String enderecoCep,
+        String enderecoLogradouro,
+        Integer enderecoNumero,
+        String enderecoComplemento,
+        String enderecoBairro,
+        String enderecoCidade,
+        String enderecoEstado
+
 ) {
     public DadosVisualizacaoPessoaFisica(PessoaFisica pessoaFisica) {
         this(pessoaFisica.getId(),
@@ -14,7 +22,14 @@ public record DadosVisualizacaoPessoaFisica(
                 pessoaFisica.getCpf(),
                 pessoaFisica.getEmail(),
                 pessoaFisica.getTelefone(),
-                pessoaFisica.getEnderecoId()
+                pessoaFisica.getEnderecoId(),
+                pessoaFisica.getEnderecoCep(),
+                pessoaFisica.getEnderecoLogradouro(),
+                pessoaFisica.getEnderecoNumero(),
+                pessoaFisica.getEnderecoComplemento(),
+                pessoaFisica.getEnderecoBairro(),
+                pessoaFisica.getEnderecoCidade(),
+                pessoaFisica.getEnderecoEstado()
                 );
     }
 }

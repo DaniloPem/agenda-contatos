@@ -13,6 +13,7 @@ public interface PessoaFisicaRepository extends JpaRepository<PessoaFisica, Long
             SELECT pf FROM PessoaFisica pf
             WHERE pf.nome LIKE :filtro OR
             pf.cpf LIKE REPLACE(REPLACE(REPLACE(:filtro, '.', ''), '-', ''), ' ', '')
+            ORDER BY pf.nome
             """)
     Page<PessoaFisica> findByFiltro(String filtro, Pageable pageable);
 }

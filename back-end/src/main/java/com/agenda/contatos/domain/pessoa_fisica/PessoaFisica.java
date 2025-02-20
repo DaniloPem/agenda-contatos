@@ -14,9 +14,9 @@ public class PessoaFisica {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
-    @CPF
+    @CPF(message = "CPF inválido.")
     private String cpf;
-    @Email
+    @Email(message = "E-mail inválido.")
     private String email;
     private String telefone;
     @OneToOne(cascade = CascadeType.ALL)
@@ -81,12 +81,32 @@ public class PessoaFisica {
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
-
-    public Long getEnderecoId() {
-        return endereco.getId();
-    }
-
     public void deletarPessoaFisica() {
         this.deletado = true;
     }
+    public Long getEnderecoId() {
+        return endereco.getId();
+    }
+    public String getEnderecoLogradouro() {
+        return endereco.getLogradouro();
+    }
+    public String getEnderecoCep() {
+        return endereco.getCep();
+    }
+    public Integer getEnderecoNumero() {
+        return endereco.getNumero();
+    }
+    public String getEnderecoComplemento() {
+        return endereco.getComplemento();
+    }
+    public String getEnderecoBairro() {
+        return endereco.getBairro();
+    }
+    public String getEnderecoCidade() {
+        return endereco.getCidade();
+    }
+    public String getEnderecoEstado() {
+        return endereco.getEstado();
+    }
+
 }
