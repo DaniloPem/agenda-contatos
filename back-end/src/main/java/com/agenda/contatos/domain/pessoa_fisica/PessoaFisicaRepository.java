@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface PessoaFisicaRepository extends JpaRepository<PessoaFisica, Long> {
 
@@ -16,4 +18,8 @@ public interface PessoaFisicaRepository extends JpaRepository<PessoaFisica, Long
             ORDER BY pf.nome
             """)
     Page<PessoaFisica> findByFiltro(String filtro, Pageable pageable);
+
+    Optional<PessoaFisica> findByCpfAndIdNot(String cpf, Long id);
+
+    Optional<PessoaFisica> findByEmailAndIdNot(String email, Long id);
 }

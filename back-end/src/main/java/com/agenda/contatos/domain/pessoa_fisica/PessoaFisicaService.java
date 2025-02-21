@@ -40,6 +40,8 @@ public class PessoaFisicaService {
     }
 
     public PessoaFisica criarPessoaFisica(DadosCadastroPessoaFisica dadosCadastroPessoaFisica) {
+        validarCpfUnico(dadosCadastroPessoaFisica, Long.valueOf(0));
+        validarEmailUnico(dadosCadastroPessoaFisica, Long.valueOf(0));
         Endereco endereco = new Endereco(dadosCadastroPessoaFisica.endereco());
         PessoaFisica pessoaFisica = new PessoaFisica(dadosCadastroPessoaFisica, endereco);
         enviarNotificacaoPeloEmailDoCadastroDoContato(pessoaFisica);
@@ -47,6 +49,8 @@ public class PessoaFisicaService {
     }
 
     public PessoaFisica editarPessoFisica(Long id, DadosCadastroPessoaFisica dadosCadastroPessoaFisica) {
+        validarCpfUnico(dadosCadastroPessoaFisica, id);
+        validarEmailUnico(dadosCadastroPessoaFisica, id);
         Optional<PessoaFisica> pessoaFisicaOptional = pessoaFisicaRepository.findById((id));
         PessoaFisica pessoaFisica = pessoaFisicaOptional.orElseThrow(() -> new DataIntegrityViolationException("CONTATO NÃO EXISTE."));
         pessoaFisica.setNome(dadosCadastroPessoaFisica.nome());
@@ -78,6 +82,20 @@ public class PessoaFisicaService {
     private void enviarNotificacaoPeloEmailDoCadastroDoContato(PessoaFisica pessoaFisica) {
         var restTemplate = new RestTemplate();
         restTemplate.getForObject("https://run.mocky.io/v3/fddc68a4-1d19-4e65-b784-39dfa253936e?email=" + pessoaFisica.getEmail() + "&subject=Nova conta", String.class);
+    }
+
+    private void validarCpfUnico(DadosCadastroPessoaFisica dadosCadastroPessoaFisica, Long id) {
+        Optional<PessoaFisica> contatoComCpfExistente = pessoaFisicaRepository.findByCpfAndIdNot(dadosCadastroPessoaFisica.cpf(), id);
+        if(contatoComCpfExistente.isPresent()) {
+            throw new DataIntegrityViolationException("JÁ EXISTE OUTRO CONTATO COM O MESMO CPF.");
+        }
+    }
+
+    private void validarEmailUnico(DadosCadastroPessoaFisica dadosCadastroPessoaFisica, Long id) {
+        Optional<PessoaFisica> contatoComEmailExistente = pessoaFisicaRepository.findByEmailAndIdNot(dadosCadastroPessoaFisica.email(), id);
+        if(contatoComEmailExistente.isPresent()) {
+            throw new DataIntegrityViolationException("JÁ EXISTE OUTRO CONTATO COM O MESMO EMAIL.");
+        }
     }
 
 }
