@@ -10,6 +10,8 @@ import { DadosVisualizacaoPessoaFisica } from '../model/dados-visualizacao-pesso
 })
 export class ContatosDaAgendaService {
   private readonly API = 'http://localhost:8080/api/pessoa-fisica';
+  private readonly API_EMAIL =
+    'https://run.mocky.io/v3/fddc68a4-1d19-4e65-b784-39dfa253936e';
 
   constructor(private httpClient: HttpClient) {}
 
@@ -46,5 +48,9 @@ export class ContatosDaAgendaService {
 
   deleteContato(id: number) {
     return this.httpClient.delete(`${this.API}/${id}`);
+  }
+
+  getMensagemNotificacaoEmailEnviado() {
+    return this.httpClient.get<{ mensagem: string }>(`${this.API_EMAIL}`);
   }
 }

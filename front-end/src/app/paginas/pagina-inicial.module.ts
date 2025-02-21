@@ -1,3 +1,4 @@
+import { NotificacaoUsuarioCadastradoEmailComponent } from './../componentes/notificacao-usuario-cadastrado-email/notificacao-usuario-cadastrado-email.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AgendaComponent } from './agenda/agenda.component';
@@ -33,6 +34,7 @@ import { CepPipe } from '../pipe/cep.pipe';
     CpfPipe,
     TelefonePipe,
     CepPipe,
+    NotificacaoUsuarioCadastradoEmailComponent,
   ],
   imports: [
     CommonModule,

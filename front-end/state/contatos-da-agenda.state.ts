@@ -11,8 +11,8 @@ import {
 } from './contatos-da-agenda.actions';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DadosVisualizacaoPessoaFisica } from 'src/app/model/dados-visualizacao-pessoa-fisica';
-import { FormBuilder } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 
 export class ContatosDaAgendaStateModel {
   public paginaDeContatos!: PessoasFisicasPagina;
@@ -37,7 +37,7 @@ export class ContatosDaAgendaState {
   constructor(
     private contatosDaAgendaService: ContatosDaAgendaService,
     private snackbar: MatSnackBar,
-    private formBuilder: FormBuilder
+    private activatedRoute: ActivatedRoute
   ) {}
 
   @Selector()
@@ -94,9 +94,7 @@ export class ContatosDaAgendaState {
       .addNovoContato(payload.contato)
       .subscribe({
         next: () => {
-          this.contatoSalvoComSucesso('add');
-          const contatoFoiCriado = true;
-          payload.dialogRef.close(contatoFoiCriado);
+          this.agendaFoiAlterada(payload, 'add');
           const state = getState();
           setState({ ...state });
         },
@@ -113,9 +111,7 @@ export class ContatosDaAgendaState {
       .updateContato(payload.contato)
       .subscribe({
         next: () => {
-          this.contatoSalvoComSucesso('update');
-          const contatoFoiAtualizado = true;
-          payload.dialogRef.close(contatoFoiAtualizado);
+          this.agendaFoiAlterada(payload, 'update');
           const state = getState();
           setState({ ...state });
         },
@@ -130,9 +126,7 @@ export class ContatosDaAgendaState {
   ) {
     return this.contatosDaAgendaService.deleteContato(payload.id).subscribe({
       next: () => {
-        this.contatoSalvoComSucesso('delete');
-        const contatoFoiApagado = true;
-        payload.dialogRef.close(contatoFoiApagado);
+        this.agendaFoiAlterada(payload, 'delete');
         const state = getState();
         setState({ ...state });
       },
@@ -140,7 +134,18 @@ export class ContatosDaAgendaState {
     });
   }
 
-  private contatoSalvoComSucesso(action: string) {
+  private agendaFoiAlterada(payload: any, action: string) {
+    this.contatosDaAgendaService
+      .getMensagemNotificacaoEmailEnviado()
+      .subscribe((res) => {
+        const mensagemEmail = res.mensagem;
+        this.contatoSalvoComSucesso(action, mensagemEmail);
+      });
+    const agendaFoiAlterada = true;
+    payload.dialogRef.close(agendaFoiAlterada);
+  }
+
+  private contatoSalvoComSucesso(action: string, mensagemEmail: string) {
     let mensagem: string = '';
     switch (action) {
       case 'add':
@@ -153,9 +158,13 @@ export class ContatosDaAgendaState {
         mensagem = 'apagado';
         break;
     }
-    this.snackbar.open(`Contato ${mensagem} com sucesso.`, '', {
-      duration: 2000,
-    });
+    this.snackbar.open(
+      `Contato ${mensagem} com sucesso. ${mensagemEmail}`,
+      '',
+      {
+        duration: 2000,
+      }
+    );
   }
 
   private mostrarExceptionErro(exception: HttpErrorResponse) {
