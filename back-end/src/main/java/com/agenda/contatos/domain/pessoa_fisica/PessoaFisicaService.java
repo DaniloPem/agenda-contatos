@@ -12,7 +12,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,7 +42,7 @@ public class PessoaFisicaService {
     public PessoaFisica criarPessoaFisica(DadosCadastroPessoaFisica dadosCadastroPessoaFisica) {
         Endereco endereco = new Endereco(dadosCadastroPessoaFisica.endereco());
         PessoaFisica pessoaFisica = new PessoaFisica(dadosCadastroPessoaFisica, endereco);
-        enviarNotificacaoDeContatoCadastroPeloEmail(pessoaFisica);
+        enviarNotificacaoPeloEmailDoCadastroDoContato(pessoaFisica);
         return pessoaFisicaRepository.save(pessoaFisica);
     }
 
@@ -76,9 +75,9 @@ public class PessoaFisicaService {
         return enderecoRepository.save(endereco);
     }
 
-    private void enviarNotificacaoDeContatoCadastroPeloEmail(PessoaFisica pessoaFisica) {
+    private void enviarNotificacaoPeloEmailDoCadastroDoContato(PessoaFisica pessoaFisica) {
         var restTemplate = new RestTemplate();
-        restTemplate.getForObject("https://run.mocky.io/v3/07399e59-f386-495d-a815-e71782ecb0e2?email=" + pessoaFisica.getEmail() + "&subject=Nova conta", String.class);
+        restTemplate.getForObject("https://run.mocky.io/v3/fddc68a4-1d19-4e65-b784-39dfa253936e?email=" + pessoaFisica.getEmail() + "&subject=Nova conta", String.class);
     }
 
 }
