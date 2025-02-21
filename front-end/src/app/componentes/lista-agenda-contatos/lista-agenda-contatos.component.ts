@@ -73,6 +73,7 @@ export class ListaAgendaContatosComponent implements AfterViewInit {
     this.matDialog
       .open(FormularioNovoContatoComponent, {
         width: '50%',
+        minWidth: '630px',
       })
       .afterClosed()
       .subscribe((contatoFoiAdicionado) => {

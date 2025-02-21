@@ -2,3 +2,21 @@
   width: 100%;
 }
 
+.logradouro-numero-container, .bairro-cidade-estado-container {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+}
+
+.formulario-logradouro {
+  width: 50%;
+}
+
+.formulario-cep {
+  margin-right: 100px;
+}
+
+.formulario-telefone {
+  margin-left: 10px;
+}
+
