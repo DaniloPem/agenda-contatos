@@ -11,7 +11,7 @@ public interface PessoaFisicaRepository extends JpaRepository<PessoaFisica, Long
 
     @Query("""
             SELECT pf FROM PessoaFisica pf
-            WHERE pf.nome LIKE :filtro OR
+            WHERE pf.nome ILIKE :filtro OR
             pf.cpf LIKE REPLACE(REPLACE(REPLACE(:filtro, '.', ''), '-', ''), ' ', '')
             ORDER BY pf.nome
             """)
