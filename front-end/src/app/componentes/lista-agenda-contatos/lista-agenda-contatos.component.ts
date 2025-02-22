@@ -74,13 +74,12 @@ export class ListaAgendaContatosComponent implements AfterViewInit {
       .open(FormularioNovoContatoComponent, {
         width: '50%',
         minWidth: '630px',
+        disableClose: true,
       })
       .afterClosed()
-      .subscribe((contatoFoiAdicionado) => {
-        if (contatoFoiAdicionado) {
-          this.carregarPaginaComListaDeContatos();
-        }
-      });
+      .subscribe((contatoFoiAdicionado) =>
+        this.recarregarDadosSeTiverAlteracoes(contatoFoiAdicionado)
+      );
   }
 
   openDialogUpdateContato(contato: any) {
@@ -88,14 +87,13 @@ export class ListaAgendaContatosComponent implements AfterViewInit {
       .open(FormularioNovoContatoComponent, {
         data: contato,
         width: '50%',
+        minWidth: '630px',
         disableClose: true,
       })
       .afterClosed()
-      .subscribe((contatoFoiAtualizado) => {
-        if (contatoFoiAtualizado) {
-          this.carregarPaginaComListaDeContatos();
-        }
-      });
+      .subscribe((contatoFoiAtualizado) =>
+        this.recarregarDadosSeTiverAlteracoes(contatoFoiAtualizado)
+      );
   }
 
   openDialogDeleteContato(contato: any) {
@@ -105,10 +103,14 @@ export class ListaAgendaContatosComponent implements AfterViewInit {
         width: '50%',
       })
       .afterClosed()
-      .subscribe((contatoFoiApagado) => {
-        if (contatoFoiApagado) {
-          this.carregarPaginaComListaDeContatos();
-        }
-      });
+      .subscribe((contatoFoiApagado) =>
+        this.recarregarDadosSeTiverAlteracoes(contatoFoiApagado)
+      );
+  }
+
+  private recarregarDadosSeTiverAlteracoes(contatoFoiApagado: any) {
+    if (contatoFoiApagado) {
+      this.carregarPaginaComListaDeContatos();
+    }
   }
 }

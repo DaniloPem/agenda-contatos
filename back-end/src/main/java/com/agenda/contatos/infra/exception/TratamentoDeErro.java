@@ -32,5 +32,6 @@ public class TratamentoDeErro {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new MensagemException(erro));
     }
 
-    private record MensagemException(String mensagem) {}
+    private record MensagemException(String mensagem) {
+    }
 }

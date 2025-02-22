@@ -40,8 +40,8 @@ public class PessoaFisicaService {
     }
 
     public PessoaFisica criarPessoaFisica(DadosCadastroPessoaFisica dadosCadastroPessoaFisica) {
-        validarCpfUnico(dadosCadastroPessoaFisica, Long.valueOf(0));
-        validarEmailUnico(dadosCadastroPessoaFisica, Long.valueOf(0));
+        validarCpfUnico(dadosCadastroPessoaFisica, 0L);
+        validarEmailUnico(dadosCadastroPessoaFisica, 0L);
         Endereco endereco = new Endereco(dadosCadastroPessoaFisica.endereco());
         PessoaFisica pessoaFisica = new PessoaFisica(dadosCadastroPessoaFisica, endereco);
         enviarNotificacaoPeloEmailDoCadastroDoContato(pessoaFisica);
@@ -86,14 +86,14 @@ public class PessoaFisicaService {
 
     private void validarCpfUnico(DadosCadastroPessoaFisica dadosCadastroPessoaFisica, Long id) {
         Optional<PessoaFisica> contatoComCpfExistente = pessoaFisicaRepository.findByCpfAndIdNot(dadosCadastroPessoaFisica.cpf(), id);
-        if(contatoComCpfExistente.isPresent()) {
+        if (contatoComCpfExistente.isPresent()) {
             throw new DataIntegrityViolationException("JÁ EXISTE OUTRO CONTATO COM O MESMO CPF.");
         }
     }
 
     private void validarEmailUnico(DadosCadastroPessoaFisica dadosCadastroPessoaFisica, Long id) {
         Optional<PessoaFisica> contatoComEmailExistente = pessoaFisicaRepository.findByEmailAndIdNot(dadosCadastroPessoaFisica.email(), id);
-        if(contatoComEmailExistente.isPresent()) {
+        if (contatoComEmailExistente.isPresent()) {
             throw new DataIntegrityViolationException("JÁ EXISTE OUTRO CONTATO COM O MESMO EMAIL.");
         }
     }

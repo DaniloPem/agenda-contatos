@@ -36,8 +36,7 @@ export class ContatosDaAgendaStateModel {
 export class ContatosDaAgendaState {
   constructor(
     private contatosDaAgendaService: ContatosDaAgendaService,
-    private snackbar: MatSnackBar,
-    private activatedRoute: ActivatedRoute
+    private snackbar: MatSnackBar
   ) {}
 
   @Selector()
@@ -158,18 +157,18 @@ export class ContatosDaAgendaState {
         mensagem = 'apagado';
         break;
     }
-    this.snackbar.open(
-      `Contato ${mensagem} com sucesso. ${mensagemEmail}`,
-      '',
-      {
-        duration: 2000,
-      }
-    );
+    // this.snackbar.open(
+    //   `Contato ${mensagem} com sucesso. ${mensagemEmail}`,
+    //   'X',
+    //   {
+    //     duration: 2000,
+    //   }
+    // );
   }
 
   private mostrarExceptionErro(exception: HttpErrorResponse) {
     const mensagem = exception.error.mensagem;
 
-    this.snackbar.open(`ERRO: ${mensagem}`, '', { duration: 3000 });
+    this.snackbar.open(`ERRO: ${mensagem}`, 'X', { duration: 3000 });
   }
 }

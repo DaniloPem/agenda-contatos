@@ -30,6 +30,6 @@ public record DadosVisualizacaoPessoaFisica(
                 pessoaFisica.getEnderecoBairro(),
                 pessoaFisica.getEnderecoCidade(),
                 pessoaFisica.getEnderecoEstado()
-                );
+        );
     }
 }

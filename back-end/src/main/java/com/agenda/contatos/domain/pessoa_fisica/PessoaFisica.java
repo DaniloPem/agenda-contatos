@@ -24,7 +24,8 @@ public class PessoaFisica {
     private Endereco endereco;
     private boolean deletado;
 
-    public PessoaFisica() {}
+    public PessoaFisica() {
+    }
 
     public PessoaFisica(DadosCadastroPessoaFisica dadosCadastroPessoaFisica, Endereco endereco) {
         this.nome = dadosCadastroPessoaFisica.nome();
@@ -78,33 +79,43 @@ public class PessoaFisica {
     public Endereco getEndereco() {
         return endereco;
     }
+
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
+
     public void deletarPessoaFisica() {
         this.deletado = true;
     }
+
     public Long getEnderecoId() {
         return endereco.getId();
     }
+
     public String getEnderecoLogradouro() {
         return endereco.getLogradouro();
     }
+
     public String getEnderecoCep() {
         return endereco.getCep();
     }
+
     public Integer getEnderecoNumero() {
         return endereco.getNumero();
     }
+
     public String getEnderecoComplemento() {
         return endereco.getComplemento();
     }
+
     public String getEnderecoBairro() {
         return endereco.getBairro();
     }
+
     public String getEnderecoCidade() {
         return endereco.getCidade();
     }
+
     public String getEnderecoEstado() {
         return endereco.getEstado();
     }
