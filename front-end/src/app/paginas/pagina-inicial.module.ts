@@ -14,7 +14,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatInputModule } from '@angular/material/input';
-import { MatDialogModule } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DEFAULT_OPTIONS,
+  MatDialogModule,
+} from '@angular/material/dialog';
 import { FormularioNovoContatoComponent } from '../componentes/formulario-add-update-contato/formulario-novo-contato.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -51,6 +54,12 @@ import { CepPipe } from '../pipe/cep.pipe';
     MatDialogModule,
     MatCardModule,
     MatSnackBarModule,
+  ],
+  providers: [
+    {
+      provide: MAT_DIALOG_DEFAULT_OPTIONS,
+      useValue: { autoFocus: 'dialog', restoreFocus: true },
+    },
   ],
 })
 export class PaginaInicialModule {}

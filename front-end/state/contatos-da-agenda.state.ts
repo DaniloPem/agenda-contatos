@@ -12,7 +12,6 @@ import {
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DadosVisualizacaoPessoaFisica } from 'src/app/model/dados-visualizacao-pessoa-fisica';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ActivatedRoute } from '@angular/router';
 
 export class ContatosDaAgendaStateModel {
   public paginaDeContatos!: PessoasFisicasPagina;
@@ -157,13 +156,14 @@ export class ContatosDaAgendaState {
         mensagem = 'apagado';
         break;
     }
-    // this.snackbar.open(
-    //   `Contato ${mensagem} com sucesso. ${mensagemEmail}`,
-    //   'X',
-    //   {
-    //     duration: 2000,
-    //   }
-    // );
+    console.log(mensagem);
+    this.snackbar.open(
+      `Contato ${mensagem} com sucesso. ${mensagemEmail}`,
+      'X',
+      {
+        duration: 2000,
+      }
+    );
   }
 
   private mostrarExceptionErro(exception: HttpErrorResponse) {
